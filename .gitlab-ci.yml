@@ -12,10 +12,6 @@ cache:
 services:
   - mongo:latest
 
-variables:
-  MONGO_URI: 'mongodb://mongo/passportdb'
-  NODE_ENV: 'test'
-
 install-dependencies:
   stage: build
   script: 
