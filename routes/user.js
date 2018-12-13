@@ -33,7 +33,7 @@ router.route('/login').get((req, res, next) => {
         res.set('Authorization', `Bearer ${token}`);
         res.cookie('accessToken', token).send({ message: 'You are logged in!', token });
       } else {
-        return res.json('password does not match');
+        return res.json({ success: false, message: 'Wrong password. Enter again!' });
       }
     });
   });

@@ -2,7 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const session = require('express-session');
-// const jsonServer = require('json-server');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -23,11 +22,6 @@ const homeRouter = require('./routes/home');
 
 const port = process.env.PORT || 3000;
 
-// const jsonRoutes = jsonServer.router(path.resolve(__dirname, 'db.json'));
-// const jsonMiddlewares = jsonServer.defaults();
-
-// app.use('/api/', jsonMiddlewares);
-// app.use('/api/', jsonRoutes);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({
@@ -39,8 +33,6 @@ app.use(session({
 }));
 app.use(cookieParser());
 app.use(passport.initialize());
-// app.use(passport.session());
-// require('./authenticate')(passport);
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('views', path.resolve(__dirname, 'views'));

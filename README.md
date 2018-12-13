@@ -1,6 +1,6 @@
 App Details:
 
-passport-mocha-12112018
+https://socket-io-12122018.herokuapp.com/ | https://git.heroku.com/socket-io-12122018.git
 
 Homepage: localhost:3000
 Login @ - localhost:3000/auth/login
