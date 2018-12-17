@@ -7,9 +7,9 @@ const Channels = require('../model/channelModel');
 
 const should = chai.should();
 
-function loginUser() {
+function registerUser() {
   return request(app)
-    .post('/auth/login')
+    .post('/auth/register')
     .type('form')
     .send({
       username: 'shilpap',
@@ -20,6 +20,7 @@ function loginUser() {
 mocha.describe('Slack Application', () => {
   let token = null;
   before((done) => {
+    registerUser();
     request.agent(app)
       .post('/auth/login')
       .send({
