@@ -28,8 +28,8 @@ mocha.describe('Slack Application', () => {
         password: '12345',
       })
       .end((err, response) => {
-        console.log(token)
         token = response.body.token;
+        console.log("response--------------------------", response);
         done();
       });
   });
