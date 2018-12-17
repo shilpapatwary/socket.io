@@ -57,16 +57,23 @@ mocha.describe('Slack Application', () => {
       });
   });
   mocha.it('should retrieve a single workspace', () => {
-    request(app)
-      .get('/api/workspaces/23140')
-      .set('Authorization', `Bearer ${token}`)
-      .expect('content-type', /json/)
-      .expect(200)
-      .end((error, res) => {
-        res.body.should.be.a('object');
-        should.not.exist(error);
-        should.exist(res);
-      });
+    const updatedWorkspace = {
+      id: `${Math.floor(Math.random() * 100000)}`,
+      name: 'workspace_old',
+    };
+    const workspace = new Workspaces(updatedWorkspace);
+    workspace.save((_err, ws) => {
+      request(app)
+        .get('/api/workspaces/23140')
+        .set('Authorization', `Bearer ${token}`)
+        .expect('content-type', /json/)
+        .expect(200)
+        .end((error, res) => {
+          res.body.should.be.a('object');
+          should.not.exist(error);
+          should.exist(res);
+        });
+    });
   });
   mocha.it('should update a workspace', () => {
     const updatedWorkspace = {
