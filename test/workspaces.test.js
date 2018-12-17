@@ -12,15 +12,24 @@ function registerUser() {
     .post('/auth/register')
     .type('form')
     .send({
-      username: 'shilpap',
-      password: '12345',
+      username: 'test',
+      password: 'test123',
     });
 }
 
 mocha.describe('Slack Application', () => {
   let token = null;
   before((done) => {
-    registerUser();
+    request.agent(app)
+      .post('/auth/register')
+      .send({
+        username: 'test',
+        password: 'test123',
+      })
+      .end((err, response) => {
+        console.log(response);
+      });
+
     request.agent(app)
       .post('/auth/login')
       .send({
@@ -29,7 +38,7 @@ mocha.describe('Slack Application', () => {
       })
       .end((err, response) => {
         token = response.body.token;
-        console.log("response--------------------------", response);
+        console.log("response--------------------------", response.body);
         done();
       });
   });
