@@ -34,8 +34,8 @@ mocha.describe('Slack Application', () => {
         request.agent(app)
           .post('/auth/login')
           .send({
-            username: 'shilpap',
-            password: '12345',
+            username: 'test',
+            password: 'test123',
           })
           .end((_err, res) => {
             token = res.body.token;
