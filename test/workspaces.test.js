@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-destructuring */
@@ -10,16 +11,6 @@ const Channels = require('../model/channelModel');
 
 const should = chai.should();
 
-function registerUser() {
-  return request(app)
-    .post('/auth/register')
-    .type('form')
-    .send({
-      username: 'test',
-      password: 'test123',
-    });
-}
-
 mocha.describe('Slack Application', () => {
   let token = null;
   before((done) => {
@@ -30,7 +21,6 @@ mocha.describe('Slack Application', () => {
         password: 'test123',
       })
       .end((_err, response) => {
-        console.log('response', response.body);
         request.agent(app)
           .post('/auth/login')
           .send({
@@ -39,7 +29,6 @@ mocha.describe('Slack Application', () => {
           })
           .end((_err, res) => {
             token = res.body.token;
-            console.log('response--------------------------', res.body);
             done();
           });
       });
