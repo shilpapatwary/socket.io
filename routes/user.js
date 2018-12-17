@@ -53,7 +53,7 @@ router.route('/register').get((req, res, next) => {
       if (err) {
         throw err;
       } else {
-        res.set('Content-Type', 'text/html');
+        res.set('Content-Type', 'application/json');
         res.status(201).send({ message: 'registered successfully' });
       }
     });
