@@ -30,7 +30,7 @@ export default class Channels {
   }
 
   createchannel(data) {
-    const markup = `<li class="channel" id="${data.id}">
+    const markup = `<li class="channel" id="${data.id}" data-wid="${data.wid}">
         <form id="channelUpdate${data.id}">
          <div class="channelHeader">
             <span class="channelTitle">${data.name}</span>
@@ -71,6 +71,7 @@ export default class Channels {
   }
 
   displaychannels(workspace) {
+    this.workspaceUsers = workspace.users;
     const wchannels = workspace.channels;
     const channelsMarkup = [];
     const messageMarkup = [];
@@ -175,9 +176,19 @@ export default class Channels {
     }, 2000);
   }
 
+  isWorkspaceUser(user) {
+    const wuser = this.workspaceUsers.filter(u => u.name == user);
+    return wuser.length > 0;
+  }
+
   addUserToChannel(elem) {
     const channelId = elem.closest('.channel').id;
+    const workspaceId = elem.closest('.channel').getAttribute('data-wid');
     const user = document.getElementById(`channelUser${channelId}`).value;
+    if(!this.isWorkspaceUser(user)) {
+      alert("user not found!");
+      return;
+    }
     const userData = JSON.stringify({
       id: `user${Math.floor(Math.random() * 100000)}`,
       name: user,
