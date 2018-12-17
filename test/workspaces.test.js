@@ -28,6 +28,7 @@ mocha.describe('Slack Application', () => {
         password: '12345',
       })
       .end((err, response) => {
+        console.log(token)
         token = response.body.token;
         done();
       });
@@ -39,6 +40,8 @@ mocha.describe('Slack Application', () => {
       .expect('content-type', /json/)
       .expect(200)
       .end((error, res) => {
+        console.log("Response ----------------------------", res);
+        console.log("error+===========================", error)
         res.body.should.be.a('Array');
         should.not.exist(error);
         should.exist(res);
