@@ -64,7 +64,7 @@ mocha.describe('Slack Application', () => {
     const workspace = new Workspaces(updatedWorkspace);
     workspace.save((_err, ws) => {
       request(app)
-        .get('/api/workspaces/23140')
+        .get(`/api/workspaces/${ws.id}`)
         .set('Authorization', `Bearer ${token}`)
         .expect('content-type', /json/)
         .expect(200)
